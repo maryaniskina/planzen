@@ -4,9 +4,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.api.health import router as health_router
 from app.core.config import settings
 from app.database.mongodb import mongodb
+from app.health.api import router as health_router
+from app.tasks.api import router as task_router
 
 
 @asynccontextmanager
@@ -26,3 +27,4 @@ app = FastAPI(
 )
 
 app.include_router(health_router)
+app.include_router(task_router, prefix='/api')

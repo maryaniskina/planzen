@@ -2,7 +2,7 @@
 from pymongo import AsyncMongoClient
 
 from app.core.config import settings
-from app.modules.users.models.user import UserDocument
+from app.modules.users.models.models import UserDocument
 
 
 class MongoDB:

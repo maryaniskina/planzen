@@ -2,7 +2,7 @@
 from pymongo import AsyncMongoClient
 
 from app.core.config import settings
-from app.modules.users.models.models import UserDocument
+from app.users.models import UserDocument
 
 
 class MongoDB:
@@ -11,7 +11,7 @@ class MongoDB:
 
     async def connect(self) -> None:
         self.client = AsyncMongoClient(
-            settings.mongodb_uri,
+            settings.mongodb_url,
             serverSelectionTimeoutMS=5000,
         )
 

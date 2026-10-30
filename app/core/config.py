@@ -1,22 +1,30 @@
 
 from functools import lru_cache
 
-from pydantic import Field
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        case_sensitive=False,
-        extra="ignore",
+        env_file='.env',
+        env_file_encoding='utf-8',
+        extra='ignore',
     )
 
-    app_name: str = "Planzen"
-    app_version: str = "0.1.0"
+    # Application
+    app_name: str = 'Planzen'
     debug: bool = False
 
-    mongodb_uri: str = Field(...)
-    mongodb_database: str = "planzen"
+    # MongoDB
+    mongodb_url: str
+    mongodb_database: str = 'planzen'
+
+    # Telegram
+    telegram_bot_token: SecretStr
+    telegram_webhook_secret: SecretStr
+    telegram_base_url: str
+    telegram_webhook_path: str = '/telegram/webhook'
 
 
 @lru_cache
